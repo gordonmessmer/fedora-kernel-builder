@@ -1,0 +1,15 @@
+# Build artifacts
+*.rpm
+*.tar.gz
+*.tar.xz
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
