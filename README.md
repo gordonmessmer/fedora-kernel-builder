@@ -74,27 +74,16 @@ Images are tagged with:
 
 ### Image Retention
 
-**GitHub Container Registry (ghcr.io)**:
-- Tagged images (`latest`, branch names) are kept indefinitely
-- Untagged images are automatically deleted
-- Git SHA-tagged images will accumulate over time
+**Automatic cleanup** is configured in the workflow using [snok/container-retention-policy](https://github.com/snok/container-retention-policy):
+- SHA-tagged images older than 30 days are automatically deleted
+- At least 3 recent images are always kept
+- `latest` and branch-name tags are preserved (no hyphen in tag)
+- Cleanup runs every time the workflow executes
 
-**Recommended retention policy**:
-1. Go to your repository → Packages → Select the image
-2. Click "Package settings"
-3. Set up a retention policy to keep:
-   - All tagged versions for 30 days
-   - Only `latest` and branch tags permanently
-   - This prevents unlimited growth from weekly SHA-tagged builds
-
-**Manual cleanup** (if needed):
-```bash
-# List all versions
-gh api /user/packages/container/PACKAGE-NAME/versions
-
-# Delete old versions
-gh api --method DELETE /user/packages/container/PACKAGE-NAME/versions/VERSION-ID
-```
+**Storage usage**:
+- With weekly builds, you'll have ~4-5 SHA-tagged images at any time
+- Plus `latest` and any branch tags (permanent)
+- Total: ~5-10 image versions depending on activity
 
 ## License
 
