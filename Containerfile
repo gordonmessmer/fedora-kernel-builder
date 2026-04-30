@@ -14,6 +14,7 @@ RUN dnf update -y && \
     rpmdevtools \
     kernel-rpm-macros \
     spectool \
+    fedpkg \
     createrepo_c \
     # Compilers and build essentials
     pesign \
